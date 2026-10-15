@@ -35,6 +35,7 @@ if(top==-1){
 }
 else{
     top--;
+    cout<<"Popped out successfully"<<endl;
 }}
 
 
@@ -73,7 +74,9 @@ int main(){
 Stack s1(5);
 s1.push(5);
 s1.push(6);
+s1.push(-1);
 s1.push(7);
+s1.pop();
 s1.peek();
 
 
