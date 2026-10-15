@@ -1,83 +1,64 @@
 #include <iostream>
 using namespace std;
 
-class Stack{
-int *arr;
-int top;
-int size;
-//constructor
+class Node{
 public:
-Stack(int s){
-size=s;
-arr=new int[s];
-top=-1;
+int data;
+Node *next;
+Node(int val){
+data=val;
+next=NULL;
 }
-
-//push
-void push(int val){
-if(top==size-1){
-    cout<<"Stack overflow";
-    return;
-}
-else{
-    top++;
-    arr[top]=val;
-    cout<<"Pushed succefully"<<endl;
-}}
-
-
-//pop
-
-void pop(){
-if(top==-1){
-    cout<<"stack underflow";
-    return;
-}
-else{
-    top--;
-    cout<<"Popped out successfully"<<endl;
-}}
-
-
-//peek
-
-void peek(){
-
-    if(top==-1){
-        cout<<"Empty";
-        return ;
-    }
-    else{
-    cout<<arr[top];
-    return;}
-}
-
-
-
-//isempty
-bool isempty(){
-    if(top==-1){
-        return true;
-    }
-    else{
-        return false;
-    }
-}
-
-
 };
 
+class Stack{
+
+int size;
+Node *top;
+
+public:
+Stack(){
+    top=NULL;
+    size=0;
+}
 
 
-int main(){
 
-Stack s1(5);
-s1.push(5);
-s1.push(6);
-s1.push(-1);
-s1.push(7);
-s1.pop();
-s1.peek();
+void push(int val){
+    Node *temp=new Node(val);
+    temp->next=NULL;
+    top=temp;
+    size++;}
+
+
+void pop(){
+if(top==NULL){
+cout<<"Stack underflow"<<endl;
+return;
+}
+
+else{
+
+Node *temp=top;
+top=top->next;
+
+delete temp;
+}
+}
+
+
+
+int peek(){
+if(top==NULL){
+    return -1;
+}
+
+else{
+
+    return top->data;
+}
 
 
 }
+
+};
