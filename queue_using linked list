@@ -1,0 +1,118 @@
+
+#include <iostream>
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* next;
+
+    Node(int val) {
+        data = val;
+        next = NULL;
+    }
+};
+
+class Queue {
+    Node* front;
+    Node* rear;
+
+public:
+    // Constructor
+    Queue() {
+        front = rear = NULL;
+    }
+
+    // Check whether queue is empty
+    bool isEmpty() {
+        return front == NULL;
+    }
+
+    // Insert an element
+    void push(int val) {
+        Node* temp = new Node(val);
+
+        if (isEmpty()) {
+            front = rear = temp;
+        }
+        else {
+            rear->next = temp;
+            rear = temp;
+        }
+
+        cout << "Pushed to queue: " << val << endl;
+    }
+
+    // Remove an element
+    void pop() {
+        if (isEmpty()) {
+            cout << "Queue underflow" << endl;
+            return;
+        }
+
+        Node* temp = front;
+        cout << "Removed: " << temp->data << endl;
+
+        front = front->next;
+
+        // If the queue becomes empty
+        if (front == NULL) {
+            rear = NULL;
+        }
+
+        delete temp;
+    }
+
+    // Display the front element
+    void start() {
+        if (isEmpty()) {
+            cout << "Queue is empty" << endl;
+        }
+        else {
+            cout << "Front element: "
+                 << front->data << endl;
+        }
+    }
+
+    // Display the rear element
+    void last() {
+        if (isEmpty()) {
+            cout << "Queue is empty" << endl;
+        }
+        else {
+            cout << "Rear element: "
+                 << rear->data << endl;
+        }
+    }
+
+    // Destructor
+    ~Queue() {
+        while (!isEmpty()) {
+            Node* temp = front;
+            front = front->next;
+            delete temp;
+        }
+        rear = NULL;
+    }
+};
+
+int main() {
+    Queue q;
+
+    q.push(10);
+    q.push(20);
+    q.push(30);
+
+    q.start();  // Front: 10
+    q.last();   // Rear: 30
+
+    q.pop();    // Removes 10
+
+    q.start();  // Front: 20
+
+    q.pop();    // Removes 20
+    q.pop();    // Removes 30
+    q.pop();    // Queue underflow
+
+    return 0;
+}

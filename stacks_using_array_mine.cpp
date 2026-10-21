@@ -43,13 +43,7 @@ cout<<"Stack empty";
     else{
         cout<<arr[top];
     }
-}
-
-
-
-
-
-};
+}};
 
 
 
